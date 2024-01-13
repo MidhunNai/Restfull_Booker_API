@@ -239,7 +239,28 @@
 		},
 		{
 			"name": "Get All booking",
-			"item": []
+			"item": [
+				{
+					"name": "Get All bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restful-booker.herokuapp.com/booking",
+							"protocol": "https",
+							"host": [
+								"restful-booker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Get Single Booking",
