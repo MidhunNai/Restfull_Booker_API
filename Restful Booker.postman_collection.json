@@ -239,7 +239,322 @@
 		},
 		{
 			"name": "Get All booking",
-			"item": []
+			"item": [
+				{
+					"name": "Verify if you  are getting status code of 201 for get all booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get all booking endpoint gives 200 Ok\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify if Response Header has content type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response have Content-Type header\", ()=>{ ",
+									"    var headers = pm.response.headers;",
+									"    pm.expect(headers.has(\"Content-Type\")).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify that value of Content-Type in Header is \"application/json; charset=utf-8\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response have Content-Type header\", ()=>{ ",
+									"    var headers = pm.response.headers;",
+									"    pm.expect(headers.get(\"Content-type\")).to.include(\"application/json; charset=utf-8\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify if Response time is less than 3000ms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less then 3000ms\", ()=>{",
+									"    var responseTime = pm.response.responseTime;",
+									"    pm.expect(responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify the Response data type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Response data is array and booking id is number\", ()=>{",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"    pm.expect(jsonData[0].bookingid).to.be.a(\"number\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify the Response data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Response data is correct\", ()=>{",
+									"    pm.expect(jsonData[0].bookingid).to.eql(973);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify that the get all booking endpoint returns a 404 Not Found status code if the endpoint does not exist.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get all booking with invalid endpoint gives 404 Not Found\", ()=>{",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking-invalid",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking-invalid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify the response code when you send get all booking endpoind with an incorrect HTTP method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get All Booking endpoint with incorrect request method gives 404 Not Found\", ()=>{",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking-invalid",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking-invalid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify that the response contains only the bookings that match the specified criteria.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Id of Midhun Nair is 2421\",()=>{",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].bookingid).to.be.eql(\"2421\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking?firstname=Midhun&lastname=Nair",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Midhun"
+								},
+								{
+									"key": "lastname",
+									"value": "Nair"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtering- Verify that the response contains only the bookings that match the specified criteria (checkin and checkout dates).",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booker_url}}/booking?checkin=2014-03-13&checkout=2014-05-21",
+							"host": [
+								"{{booker_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "checkin",
+									"value": "2014-03-13"
+								},
+								{
+									"key": "checkout",
+									"value": "2014-05-21"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Get Single Booking",
@@ -272,6 +587,12 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "booker_url",
+			"value": ""
 		}
 	]
 }
