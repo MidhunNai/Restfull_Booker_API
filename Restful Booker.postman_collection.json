@@ -2566,6 +2566,15 @@
 									"pm.test(\"Response for Delete Endpoint with wrong booking id format is Not Found\", ()=>{",
 									"    pm.expect(response).to.eql(\"Not Found\");",
 									"});",
+									"",
+									"pm.collectionVariables.unset(\"booker_url\");",
+									"pm.collectionVariables.unset(\"firstName\");",
+									"pm.collectionVariables.unset(\"lastName\");",
+									"pm.collectionVariables.unset(\"checkinDate\");",
+									"pm.collectionVariables.unset(\"checkoutDate\");",
+									"pm.collectionVariables.unset(\"bookingId\");",
+									"pm.collectionVariables.unset(\"token\");",
+									"",
 									""
 								],
 								"type": "text/javascript"
@@ -2618,36 +2627,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "booker_url",
-			"value": ""
-		},
-		{
-			"key": "firstName",
-			"value": ""
-		},
-		{
-			"key": "lastName",
-			"value": ""
-		},
-		{
-			"key": "checkinDate",
-			"value": ""
-		},
-		{
-			"key": "checkoutDate",
-			"value": ""
-		},
-		{
-			"key": "bookingId",
-			"value": ""
-		},
-		{
-			"key": "token",
-			"value": ""
 		}
 	]
 }
